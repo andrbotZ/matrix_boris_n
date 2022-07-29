@@ -11,15 +11,16 @@ import com.example.matrix_boris_n.executor.FetchLocalDataCallable;
 import com.example.matrix_boris_n.interfaces.OnDataChangeListener;
 import com.example.matrix_boris_n.interfaces.Repository;
 import com.example.matrix_boris_n.models.DataListObject;
+import com.example.matrix_boris_n.models.DataObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WelcomeRepository implements Repository<List<DataListObject>> {
+public class WelcomeRepository implements Repository<DataObject> {
 
     private final Context context;
-    private ArrayList<OnDataChangeListener<List<DataListObject>>> listeners = new ArrayList<>();
+    private ArrayList<OnDataChangeListener<DataObject>> listeners = new ArrayList<>();
     private AppExecutor executor = new AppExecutor();
 
     public WelcomeRepository(Context context) {
@@ -27,14 +28,14 @@ public class WelcomeRepository implements Repository<List<DataListObject>> {
     }
 
     @Override
-    public void addListener(@NonNull OnDataChangeListener<List<DataListObject>> listener) {
+    public void addListener(@NonNull OnDataChangeListener<DataObject> listener) {
         if(!listeners.contains(listener)){
             listeners.add(listener);
         }
     }
 
     @Override
-    public void removeListener(@NonNull OnDataChangeListener<List<DataListObject>> listener) {
+    public void removeListener(@NonNull OnDataChangeListener<DataObject> listener) {
         if(!listeners.contains(listener)){
             listeners.remove(listener);
         }
@@ -44,9 +45,9 @@ public class WelcomeRepository implements Repository<List<DataListObject>> {
     public void fetchData(String name) {
         try{
             InputStream stream = context.getResources().openRawResource(R.raw.local_data);
-            executor.execute(new FetchLocalDataCallable(stream), new AppExecutor.Callback<List<DataListObject>>() {
+            executor.execute(new FetchLocalDataCallable(stream), new AppExecutor.Callback<DataObject>() {
                 @Override
-                public void onComplete(List<DataListObject> result) {
+                public void onComplete(DataObject result) {
                     broadcastToListeners(result);
                 }
 
@@ -63,9 +64,9 @@ public class WelcomeRepository implements Repository<List<DataListObject>> {
         }
     }
 
-    private void broadcastToListeners(List<DataListObject> result) {
+    private void broadcastToListeners(DataObject result) {
         if(listeners.size() > 0 && result != null){
-            for (OnDataChangeListener<List<DataListObject>> listener:listeners) {
+            for (OnDataChangeListener<DataObject> listener:listeners) {
                 listener.onDataChange(result);
             }
         }

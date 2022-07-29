@@ -4,7 +4,9 @@ import android.util.JsonReader;
 import android.util.Log;
 
 import com.example.matrix_boris_n.models.DataListAddr;
+import com.example.matrix_boris_n.models.DataListCat;
 import com.example.matrix_boris_n.models.DataListObject;
+import com.example.matrix_boris_n.models.DataObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,33 +15,38 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CatalogJsonParser {
+public class DataListObjectJsonParser {
 
     private JsonReader reader;
 
 
-    public CatalogJsonParser(InputStream stream) {
-
-        try {
-            reader = new JsonReader(new InputStreamReader(stream, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
+    public DataListObjectJsonParser(InputStreamReader stream) {
+        reader = new JsonReader(stream);
     }
 
-    public List<DataListObject> parse() throws IOException {
-        List<DataListObject> items = new ArrayList<>();
+    public DataObject parse() throws IOException {
+        List<DataListObject> dataListObjects = new ArrayList<>();
+        List<DataListCat> listCat = new ArrayList<>();
+
         if(reader != null){
             reader.beginObject();
             if(reader.nextName().equalsIgnoreCase("DataObject")) {
                 reader.beginObject();
                 while (reader.hasNext()) {
-
-                    if (reader.nextName().equalsIgnoreCase("DataListObject")) {
+                    String name = reader.nextName();
+                    if (name.equalsIgnoreCase("DataListObject")) {
                         reader.beginArray();
                         while (reader.hasNext()) {
                             DataListObject item = parseItem(reader);
-                            items.add(item);
+                            dataListObjects.add(item);
+                        }
+                        reader.endArray();
+                    }
+                    else if(name.equalsIgnoreCase("DataListCat")) {
+                        reader.beginArray();
+                        while (reader.hasNext()) {
+                            DataListCat item = parseCatItem(reader);
+                            listCat.add(item);
                         }
                         reader.endArray();
                     }
@@ -48,10 +55,35 @@ public class CatalogJsonParser {
                 }
                 reader.endObject();
             }
+
             reader.endObject();
             reader.close();
         }
-        return items;
+        return new DataObject(dataListObjects, listCat);
+    }
+
+    private DataListCat parseCatItem(JsonReader reader) throws IOException {
+
+        long catId = 0;
+        String cTitle = "";
+
+        reader.beginObject();
+        while (reader.hasNext()){
+            String name = reader.nextName();
+            switch (name){
+                case "CatId":
+                    catId = reader.nextLong();
+                    break;
+                case "CTitle":
+                    cTitle = reader.nextString();
+                    break;
+                default:
+                    reader.skipValue();
+                    break;
+            }
+        }
+        reader.endObject();
+        return new DataListCat(catId, cTitle);
     }
 
     private DataListObject parseItem(JsonReader reader) throws IOException {

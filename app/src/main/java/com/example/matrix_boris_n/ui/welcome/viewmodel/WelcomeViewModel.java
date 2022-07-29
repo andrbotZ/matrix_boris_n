@@ -8,18 +8,15 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.matrix_boris_n.interfaces.OnDataChangeListener;
 import com.example.matrix_boris_n.interfaces.Repository;
+import com.example.matrix_boris_n.models.DataObject;
 import com.example.matrix_boris_n.ui.welcome.repository.WelcomeRepository;
 
-import com.example.matrix_boris_n.models.DataListObject;
-
-import java.util.List;
-
-public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeListener<List<DataListObject>> {
+public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeListener<DataObject> {
 
      @NonNull
-    private final Repository<List<DataListObject>> repository = new WelcomeRepository(getApplication().getApplicationContext());
+    private final Repository<DataObject> repository = new WelcomeRepository(getApplication().getApplicationContext());
 
-    public final MutableLiveData<List<DataListObject>> dataList = new MutableLiveData<>();
+    public final MutableLiveData<DataObject> data = new MutableLiveData<>();
 
     public WelcomeViewModel(@NonNull Application application) {
         super(application);
@@ -32,9 +29,9 @@ public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeL
 
 
     @Override
-    public void onDataChange(List<DataListObject> data) {
+    public void onDataChange(DataObject data) {
         if(data != null){
-            dataList.setValue(data);
+            this.data.setValue(data);
         }
     }
 

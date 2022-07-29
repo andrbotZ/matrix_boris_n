@@ -1,16 +1,17 @@
 package com.example.matrix_boris_n.executor;
 
-import com.example.matrix_boris_n.json.CatalogJsonParser;
+import com.example.matrix_boris_n.json.DataListObjectJsonParser;
+import com.example.matrix_boris_n.models.DataListCat;
 import com.example.matrix_boris_n.models.DataListObject;
+import com.example.matrix_boris_n.models.DataObject;
 
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-public class FetchLocalDataCallable implements Callable<List<DataListObject>> {
+public class FetchLocalDataCallable implements Callable<DataObject> {
     private final InputStream stream;
-    private ArrayList<DataListObject> data = new ArrayList<>();
 
     public FetchLocalDataCallable(InputStream stream) {
         this.stream = stream;
@@ -18,8 +19,8 @@ public class FetchLocalDataCallable implements Callable<List<DataListObject>> {
     }
 
     @Override
-    public List<DataListObject> call() throws Exception {
-        CatalogJsonParser parser = new CatalogJsonParser(stream);
-        return parser.parse();
+    public DataObject call() throws Exception {
+        DataListObjectJsonParser parserObject = new DataListObjectJsonParser(new InputStreamReader(stream, "UTF-8"));
+        return parserObject.parse();
     }
 }

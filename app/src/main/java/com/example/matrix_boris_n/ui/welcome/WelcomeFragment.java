@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.matrix_boris_n.databinding.FragmentWelcomeBinding;
 import com.example.matrix_boris_n.factory.ViewModelFactory;
 import com.example.matrix_boris_n.models.DataListObject;
+import com.example.matrix_boris_n.models.DataObject;
 import com.example.matrix_boris_n.ui.welcome.viewmodel.WelcomeViewModel;
 
 import java.util.List;
@@ -56,12 +56,9 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        viewModel.dataList.observe(getViewLifecycleOwner(), new Observer<List<DataListObject>>() {
-            @Override
-            public void onChanged(List<DataListObject> data) {
-                if (data != null && !data.isEmpty()) {
-                    binding.loading.cancelAnimation();
-                }
+        viewModel.data.observe(getViewLifecycleOwner(), data -> {
+            if (data != null) {
+                binding.loading.cancelAnimation();
             }
         });
     }

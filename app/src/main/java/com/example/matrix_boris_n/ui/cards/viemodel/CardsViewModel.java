@@ -6,18 +6,21 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.example.matrix_boris_n.models.DataListObject;
+import com.example.matrix_boris_n.models.DataObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CardsViewModel extends AndroidViewModel {
-    private List<DataListObject> data = new ArrayList<>();
+
+    private DataObject cardData;
 
     public CardsViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public void setCardsData(List<DataListObject> data) {
-        this.data = data;
+
+    public void setCardsData(DataObject data) {
+        this.cardData = data;
     }
 }
