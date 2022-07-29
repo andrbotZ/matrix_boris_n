@@ -6,8 +6,8 @@ import android.os.Bundle;
 
 import com.example.matrix_boris_n.databinding.ActivityMainBinding;
 import com.example.matrix_boris_n.factory.ViewModelFactory;
+import com.example.matrix_boris_n.ui.benefits.viewmodel.BenefitsViewModel;
 import com.example.matrix_boris_n.ui.cards.CardsFragment;
-import com.example.matrix_boris_n.ui.cards.viemodel.CardsViewModel;
 import com.example.matrix_boris_n.ui.welcome.viewmodel.WelcomeViewModel;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private WelcomeViewModel welcomeViewModel;
     private ActivityMainBinding binding;
-    private CardsViewModel cardsViewModel;
+    private BenefitsViewModel benefitsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +28,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         welcomeViewModel = ViewModelFactory.getInstance(getApplication()).create(WelcomeViewModel.class);
-        cardsViewModel = ViewModelFactory.getInstance(getApplication()).create(CardsViewModel.class);
+        benefitsViewModel = ViewModelFactory.getInstance(getApplication()).create(BenefitsViewModel.class);
 
         welcomeViewModel.data.observe(this, data -> {
             if (data != null){
-                cardsViewModel.setCardsData(data);
+                benefitsViewModel.setCategories(data.categories);
+                benefitsViewModel.setElements(data.elements);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView, new CardsFragment()).commit();
             }
         });

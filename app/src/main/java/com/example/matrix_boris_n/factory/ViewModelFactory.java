@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.matrix_boris_n.ui.benefits.viewmodel.BenefitsViewModel;
 import com.example.matrix_boris_n.ui.cards.viemodel.CardsViewModel;
 import com.example.matrix_boris_n.ui.welcome.viewmodel.WelcomeViewModel;
 
@@ -44,7 +45,12 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
                         ViewModel cvm = new CardsViewModel(app);
                         viewModels.put(CardsViewModel.class.getSimpleName(), cvm);
                         break;
+                    case"BenefitsViewModel":
+                        ViewModel bvm = new BenefitsViewModel(app);
+                        viewModels.put(BenefitsViewModel.class.getSimpleName(), bvm);
+                        break;
                 }
+
             }
             return (T) viewModels.get(modelClass.getSimpleName());
         }
