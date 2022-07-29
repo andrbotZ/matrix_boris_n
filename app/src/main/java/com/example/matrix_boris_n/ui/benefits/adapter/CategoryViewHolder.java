@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -15,17 +16,19 @@ import java.util.List;
 
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
     private final TextView titleView;
-    private final ViewPager2 pager;
+    private final RecyclerView recyclerView;
+    private ElementsAdapter adapter = new ElementsAdapter();
 
-    public CategoryViewHolder(@NonNull View itemView, FragmentStateAdapter adapter) {
+    public CategoryViewHolder(@NonNull View itemView) {
         super(itemView);
         titleView = itemView.findViewById(R.id.categoryTitle);
-        pager = itemView.findViewById(R.id.category_pager);
-        pager.setAdapter(adapter);
+        recyclerView = itemView.findViewById(R.id.elements);
+        recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
     }
 
     public void bind(String title, List<DataListObject> elements) {
         titleView.setText(title);
-
+        adapter.setElements(elements);
     }
 }

@@ -20,13 +20,13 @@ import java.util.List;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
     private List<DataListCat> categories = new ArrayList<>();
     private List<DataListObject> elements = new ArrayList<>();
-    private BenefitsPageAdapter benefitsAdapter ;
+
 
     @NonNull
     @Override
     public CategoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_view_holder_layout, parent, false);
-        return new CategoryViewHolder(view, benefitsAdapter);
+        return new CategoryViewHolder(view);
     }
 
     @Override
@@ -62,9 +62,5 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> 
     public void setElements(List<DataListObject> elements) {
         this.elements = elements;
         notifyDataSetChanged();
-    }
-
-    public void setElementsAdapterOwner(Fragment fragment) {
-        benefitsAdapter = new BenefitsPageAdapter(fragment);
     }
 }
