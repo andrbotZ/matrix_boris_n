@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -46,7 +47,10 @@ public class CardsFragment extends Fragment {
 
         }).attach();
 
+        binding.cardsPager.setUserInputEnabled(false);
+
     }
+
 
     @Override
     public void onDestroy() {

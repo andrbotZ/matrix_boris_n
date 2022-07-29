@@ -26,7 +26,7 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ElementViewHolder holder, int position) {
-        if(elements.size() < position){
+        if(elements.size() > position){
             holder.bind(elements.get(position));
         }
     }

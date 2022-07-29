@@ -23,7 +23,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
         titleView = itemView.findViewById(R.id.categoryTitle);
         recyclerView = itemView.findViewById(R.id.elements);
-        recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(itemView.getContext(), LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setAdapter(adapter);
     }
 
