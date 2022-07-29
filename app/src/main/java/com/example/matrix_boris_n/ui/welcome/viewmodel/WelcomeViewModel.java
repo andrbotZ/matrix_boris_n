@@ -16,14 +16,15 @@ import java.util.List;
 
 public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeListener<List<DataListObject>> {
 
-    private Repository repository = new WelcomeRepository(getApplication().getApplicationContext());
+     @NonNull
+    private final Repository<List<DataListObject>> repository = new WelcomeRepository(getApplication().getApplicationContext());
 
-    private MutableLiveData<List<DataListObject>> catalogList = new MutableLiveData<>();
+    private final MutableLiveData<List<DataListObject>> catalogList = new MutableLiveData<>();
     public MutableLiveData<Boolean> isRemoteDataReady = new MutableLiveData<>(false);
 
     public WelcomeViewModel(@NonNull Application application) {
         super(application);
-        ((WelcomeRepository)repository).addListener(this);
+        repository.addListener(this);
     }
 
     public void fetchRemoteData() {
@@ -39,5 +40,11 @@ public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeL
         if(data != null){
             isRemoteDataReady.setValue(true);
         }
+    }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        repository.removeListener(this);
     }
 }

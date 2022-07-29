@@ -8,6 +8,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.matrix_boris_n.ui.welcome.viewmodel.WelcomeViewModel;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
     private static volatile ViewModelFactory instance;
@@ -16,6 +20,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     private ViewModelFactory(Application app){
         this.app = app;
     }
+    HashMap<String,ViewModel> viewModels = new HashMap<>();
 
     public static ViewModelFactory getInstance(Application app){
         if (instance == null){
@@ -27,7 +32,21 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        if(modelClass == WelcomeViewModel.class) return (T) new WelcomeViewModel(app);
+
+        try {
+            if (!viewModels.containsKey(modelClass.getSimpleName())){
+                switch (modelClass.getSimpleName()){
+                    case"WelcomeViewModel":
+                        WelcomeViewModel vm = new WelcomeViewModel(app);
+                        viewModels.put(WelcomeViewModel.class.getSimpleName(), vm);
+                        break;
+                }
+            }
+            return  (T) viewModels.get(modelClass.getSimpleName());
+        }
+        catch (Exception ex){
+            ex.printStackTrace();
+        }
         return null;
     }
 }

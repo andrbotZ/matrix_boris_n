@@ -40,18 +40,12 @@ public class WelcomeFragment extends Fragment {
         viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().getApplication())).get(WelcomeViewModel.class);
 
         new CountDownTimer(2000, 1000) {
-
             public void onTick(long millisUntilFinished) {
-
             }
-
             public void onFinish() {
                 viewModel.fetchRemoteData();
             }
         }.start();
-
-
-
     }
 
     @Override
@@ -61,7 +55,6 @@ public class WelcomeFragment extends Fragment {
             @Override
             public void onChanged(Boolean isReady) {
                 if(isReady){
-                    Log.d("test", "onChanged: " + isReady);
                     binding.loading.cancelAnimation();
                 }
             }
