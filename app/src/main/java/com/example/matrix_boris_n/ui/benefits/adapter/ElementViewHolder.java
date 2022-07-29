@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrix_boris_n.R;
-import com.example.matrix_boris_n.executor.AppExecutor;
-import com.example.matrix_boris_n.executor.FetchImageCallable;
-import com.example.matrix_boris_n.executor.FetchLocalDataCallable;
 import com.example.matrix_boris_n.models.DataListObject;
 import com.example.matrix_boris_n.models.DataObject;
 

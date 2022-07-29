@@ -1,5 +1,6 @@
 package com.example.matrix_boris_n.ui.card;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.view.ViewGroup;
 import com.example.matrix_boris_n.R;
 import com.example.matrix_boris_n.databinding.FragmentCardBinding;
 import com.example.matrix_boris_n.databinding.FragmentCardsBinding;
+import com.example.matrix_boris_n.executor.AppExecutor;
+import com.example.matrix_boris_n.executor.FetchImageCallable;
 import com.example.matrix_boris_n.factory.ViewModelFactory;
 import com.example.matrix_boris_n.models.DataListCat;
 import com.example.matrix_boris_n.models.DataListObject;
@@ -28,6 +31,7 @@ public class CardFragment extends Fragment {
     private BenefitsViewModel viewModel;
     private int element_index = -1;
     private List<DataListCat> categories;
+    private AppExecutor executor = new AppExecutor();
 
     public CardFragment() {
         // Required empty public constructor
@@ -54,19 +58,30 @@ public class CardFragment extends Fragment {
                 categories = dataListCats;
             }
         });
-        viewModel.elements.observe(getViewLifecycleOwner(), new Observer<List<DataListObject>>() {
-            @Override
-            public void onChanged(List<DataListObject> dataListObjects) {
-                if(!dataListObjects.isEmpty() && element_index > -1){
-                    DataListObject item = dataListObjects.get(element_index);
-                    binding.id.setText(String.valueOf(item.id));
-                    if(!categories.isEmpty()){
-                        binding.category.setText(categories.get((int) item.catId).cTitle);
-                    }
-
+        viewModel.elements.observe(getViewLifecycleOwner(), dataListObjects -> {
+            if(!dataListObjects.isEmpty() && element_index > -1){
+                DataListObject item = dataListObjects.get(element_index);
+                binding.id.setText(String.valueOf(item.id));
+                if(!categories.isEmpty()){
+                    binding.category.setText(categories.get((int) item.catId).cTitle);
                 }
 
+                executor.execute(new FetchImageCallable(dataListObjects.get(element_index).image), new AppExecutor.Callback<Bitmap>() {
+                    @Override
+                    public void onComplete(Bitmap result) {
+                        if (result != null){
+                           binding.image.setImageBitmap(result);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+                });
+
             }
+
         });
     }
 

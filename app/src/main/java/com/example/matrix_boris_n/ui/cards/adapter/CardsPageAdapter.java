@@ -6,6 +6,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.matrix_boris_n.ui.benefits.BenefitsFragment;
 import com.example.matrix_boris_n.ui.card.CardFragment;
+import com.example.matrix_boris_n.ui.tab.TabFragment;
+import com.example.matrix_boris_n.utility.Constants;
 
 public class CardsPageAdapter extends FragmentStateAdapter {
     public CardsPageAdapter(@NonNull Fragment fragment) {
@@ -15,7 +17,7 @@ public class CardsPageAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Fragment fragment = new CardFragment();
+        Fragment fragment = TabFragment.newInstance(Constants.tabNames.get(Constants.tabNames.size() - position - 1));
         switch (position){
             case 3:
                 return new BenefitsFragment();

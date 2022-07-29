@@ -44,7 +44,6 @@ public class CardsFragment extends Fragment {
         binding.cardsPager.setAdapter(pageAdapter);
         new TabLayoutMediator(binding.tabLayout, binding.cardsPager, (tab, position) -> {
             tab.setText(Constants.tabNames.get(Constants.tabNames.size() - position - 1));
-
         }).attach();
 
         binding.cardsPager.setUserInputEnabled(false);
