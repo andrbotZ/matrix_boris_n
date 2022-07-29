@@ -19,6 +19,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
     private final RecyclerView recyclerView;
     private ElementsAdapter adapter = new ElementsAdapter();
 
+
     public CategoryViewHolder(@NonNull View itemView) {
         super(itemView);
         titleView = itemView.findViewById(R.id.categoryTitle);
