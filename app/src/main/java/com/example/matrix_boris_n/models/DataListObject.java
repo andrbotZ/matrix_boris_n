@@ -3,12 +3,12 @@ package com.example.matrix_boris_n.models;
 import java.util.List;
 
 public class DataListObject {
-    private final long catId;
-    private final String title;
-    private final String sTitle;
-    private final String image;
-    private final long id;
-    private final List<DataListAddr> dataListAddrList;
+    public final long catId;
+    public final String title;
+    public final String sTitle;
+    public final String image;
+    public final long id;
+    public final List<DataListAddr> dataListAddrList;
 
     public DataListObject(long catId, String title, String sTitle, String image, long id, List<DataListAddr> dataListAddrList) {
         this.catId = catId;

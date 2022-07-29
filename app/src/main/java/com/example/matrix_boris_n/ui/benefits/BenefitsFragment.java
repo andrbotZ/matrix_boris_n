@@ -27,7 +27,7 @@ public class BenefitsFragment extends Fragment {
 
     private FragmentBenefitsBinding binding;
     private BenefitsViewModel viewModel;
-    private CategoriesAdapter adapter = new CategoriesAdapter();;
+    private CategoriesAdapter adapter;
 
     public BenefitsFragment() {
         // Required empty public constructor
@@ -46,10 +46,11 @@ public class BenefitsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().getApplication())).get(BenefitsViewModel.class);
         binding.categories.setLayoutManager(new LinearLayoutManager(requireContext()));
+        adapter = new CategoriesAdapter();
+        adapter.setElementsAdapterOwner(this);
         binding.categories.setAdapter(adapter);
         viewModel.categories.observe(getViewLifecycleOwner(), categories -> adapter.setCategories(categories));
         viewModel.elements.observe(getViewLifecycleOwner(), elements -> adapter.setElements(elements));
-
     }
 
     @Override
