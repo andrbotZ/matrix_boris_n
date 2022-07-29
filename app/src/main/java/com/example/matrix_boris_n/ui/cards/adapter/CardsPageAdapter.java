@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.matrix_boris_n.ui.benefits.BenefitsFragment;
 import com.example.matrix_boris_n.ui.card.CardFragment;
 
 public class CardsPageAdapter extends FragmentStateAdapter {
@@ -14,7 +15,12 @@ public class CardsPageAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        return new CardFragment();
+        Fragment fragment = new CardFragment();
+        switch (position){
+            case 3:
+                return new BenefitsFragment();
+        }
+       return fragment;
     }
 
     @Override
