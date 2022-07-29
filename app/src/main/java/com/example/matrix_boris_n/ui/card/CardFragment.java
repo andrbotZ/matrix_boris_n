@@ -31,7 +31,6 @@ public class CardFragment extends Fragment {
     private BenefitsViewModel viewModel;
     private int element_index = -1;
     private List<DataListCat> categories;
-    private AppExecutor executor = new AppExecutor();
 
     public CardFragment() {
         // Required empty public constructor
@@ -58,28 +57,16 @@ public class CardFragment extends Fragment {
                 categories = dataListCats;
             }
         });
-        viewModel.elements.observe(getViewLifecycleOwner(), dataListObjects -> {
-            if(!dataListObjects.isEmpty() && element_index > -1){
-                DataListObject item = dataListObjects.get(element_index);
+        viewModel.elements.observe(getViewLifecycleOwner(), elements -> {
+            if(!elements.isEmpty() && element_index > -1){
+                DataListObject item = elements.get(element_index);
                 binding.id.setText(String.valueOf(item.id));
                 if(!categories.isEmpty()){
                     binding.category.setText(categories.get((int) item.catId).cTitle);
                 }
-
-                executor.execute(new FetchImageCallable(dataListObjects.get(element_index).image), new AppExecutor.Callback<Bitmap>() {
-                    @Override
-                    public void onComplete(Bitmap result) {
-                        if (result != null){
-                           binding.image.setImageBitmap(result);
-                        }
-                    }
-
-                    @Override
-                    public void onError(Exception e) {
-
-                    }
-                });
-
+                if(item.bitmap != null){
+                    binding.image.setImageBitmap(item.bitmap);
+                }
             }
 
         });

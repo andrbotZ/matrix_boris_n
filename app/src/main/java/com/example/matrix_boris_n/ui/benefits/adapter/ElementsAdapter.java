@@ -20,7 +20,6 @@ import java.util.List;
 public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
 
     private List<DataListObject> elements = new ArrayList<>();
-    private AppExecutor executor = new AppExecutor();
     public OnElementCLickListener onElementCLickListener;
 
     @NonNull
@@ -34,26 +33,15 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
     public void onBindViewHolder(@NonNull ElementViewHolder holder, @SuppressLint("RecyclerView") int position) {
         if(elements.size() > position){
 
-            executor.execute(new FetchImageCallable(elements.get(position).image), new AppExecutor.Callback<Bitmap>() {
-                @Override
-                public void onComplete(Bitmap result) {
-                    if (result != null)
-                        holder.bind(elements.get(position), result);
-                        holder.itemView.setOnClickListener(v -> {
+            holder.bind(elements.get(position));
+            holder.itemView.setOnClickListener(v -> {
 
-                            if (onElementCLickListener != null){
-                                onElementCLickListener.onClick(v, position);
-                            }
-                        });
+                if (onElementCLickListener != null){
+                    onElementCLickListener.onClick(v, position);
                 }
 
-                @Override
-                public void onError(Exception e) {
-
-                }
-            });
-
-        }
+        });
+    }
     }
 
     @Override

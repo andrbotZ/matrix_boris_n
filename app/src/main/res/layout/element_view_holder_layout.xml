@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp">
+    android:layout_height="match_parent"
+    android:layout_marginLeft="10dp"
+    android:background="@color/black">
 
     <ImageView
         android:id="@+id/element_image"
-        android:background="@color/teal_200"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_alignParentEnd="true">
 
     </ImageView>
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -19,7 +19,7 @@
         android:orientation="vertical"
         android:layoutDirection="rtl"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true">
+        android:layout_alignRight="@id/element_image">
         <TextView
             android:id="@+id/element_title"
             android:textSize="12sp"

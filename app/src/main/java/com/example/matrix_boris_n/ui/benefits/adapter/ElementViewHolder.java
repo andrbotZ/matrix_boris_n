@@ -17,8 +17,7 @@ public class ElementViewHolder extends RecyclerView.ViewHolder {
     private final ImageView imageView;
     private final TextView titleView;
     private final TextView smalltitleView;
-    private Bitmap bitmap;
-    private DataListObject element;
+
 
 
     public ElementViewHolder(@NonNull View itemView) {
@@ -28,11 +27,14 @@ public class ElementViewHolder extends RecyclerView.ViewHolder {
         imageView = itemView.findViewById(R.id.element_image);
     }
 
-    public void bind(DataListObject element, Bitmap result) {
-        this.element = element;
-        this.bitmap = result;
+    public void bind(DataListObject element) {
         titleView.setText(element.title);
         smalltitleView.setText(element.sTitle);
-        imageView.setImageBitmap(result);
+        imageView.setImageBitmap(element.bitmap);
+        if(element.bitmap == null){
+            titleView.setTextColor(itemView.getContext().getColor(R.color.black));
+            smalltitleView.setTextColor(itemView.getContext().getColor(R.color.black));
+        }
+
     }
 }

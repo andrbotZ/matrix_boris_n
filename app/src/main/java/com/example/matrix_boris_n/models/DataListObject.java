@@ -1,5 +1,7 @@
 package com.example.matrix_boris_n.models;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 public class DataListObject {
@@ -9,6 +11,7 @@ public class DataListObject {
     public final String image;
     public final long id;
     public final List<DataListAddr> dataListAddrList;
+    public Bitmap bitmap;
 
     public DataListObject(long catId, String title, String sTitle, String image, long id, List<DataListAddr> dataListAddrList) {
         this.catId = catId;

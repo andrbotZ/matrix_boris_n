@@ -2,11 +2,13 @@ package com.example.matrix_boris_n.ui.welcome.repository;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 
 import androidx.annotation.NonNull;
 
 import com.example.matrix_boris_n.R;
 import com.example.matrix_boris_n.executor.AppExecutor;
+import com.example.matrix_boris_n.executor.FetchImageCallable;
 import com.example.matrix_boris_n.executor.FetchLocalDataCallable;
 import com.example.matrix_boris_n.interfaces.OnDataChangeListener;
 import com.example.matrix_boris_n.interfaces.Repository;
@@ -48,6 +50,8 @@ public class WelcomeRepository implements Repository<DataObject> {
             executor.execute(new FetchLocalDataCallable(stream), new AppExecutor.Callback<DataObject>() {
                 @Override
                 public void onComplete(DataObject result) {
+
+                    downloadImages(result);
                     broadcastToListeners(result);
                 }
 
@@ -61,6 +65,25 @@ public class WelcomeRepository implements Repository<DataObject> {
 
         }catch (Resources.NotFoundException ex){
             ex.printStackTrace();
+        }
+    }
+
+    private void downloadImages(DataObject data) {
+        if (!data.elements.isEmpty()) {
+            for (DataListObject element : data.elements) {
+                executor.execute(new FetchImageCallable(element.image), new AppExecutor.Callback<Bitmap>() {
+                    @Override
+                    public void onComplete(Bitmap result) {
+                        if (result != null)
+                            element.bitmap = result;
+
+                    }
+                    @Override
+                    public void onError(Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
         }
     }
 
