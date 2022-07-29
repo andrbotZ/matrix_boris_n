@@ -2,6 +2,8 @@ package com.example.matrix_boris_n.ui.cards;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,6 +27,11 @@ public class CardsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentCardsBinding.inflate(inflater, container, false);
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

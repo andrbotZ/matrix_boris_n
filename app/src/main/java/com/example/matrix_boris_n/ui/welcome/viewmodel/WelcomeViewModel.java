@@ -19,8 +19,7 @@ public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeL
      @NonNull
     private final Repository<List<DataListObject>> repository = new WelcomeRepository(getApplication().getApplicationContext());
 
-    private final MutableLiveData<List<DataListObject>> catalogList = new MutableLiveData<>();
-    public MutableLiveData<Boolean> isRemoteDataReady = new MutableLiveData<>(false);
+    public final MutableLiveData<List<DataListObject>> dataList = new MutableLiveData<>();
 
     public WelcomeViewModel(@NonNull Application application) {
         super(application);
@@ -31,14 +30,11 @@ public class WelcomeViewModel  extends AndroidViewModel implements OnDataChangeL
        repository.fetchData("local_data.json");
     }
 
-    public MutableLiveData<List<DataListObject>> getCatalog() {
-        return catalogList;
-    }
 
     @Override
     public void onDataChange(List<DataListObject> data) {
         if(data != null){
-            isRemoteDataReady.setValue(true);
+            dataList.setValue(data);
         }
     }
 

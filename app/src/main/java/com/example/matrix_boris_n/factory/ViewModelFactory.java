@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.matrix_boris_n.ui.cards.viemodel.CardsViewModel;
 import com.example.matrix_boris_n.ui.welcome.viewmodel.WelcomeViewModel;
 
 import java.util.ArrayList;
@@ -34,15 +35,20 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
         try {
+
             if (!viewModels.containsKey(modelClass.getSimpleName())){
                 switch (modelClass.getSimpleName()){
                     case"WelcomeViewModel":
-                        WelcomeViewModel vm = new WelcomeViewModel(app);
-                        viewModels.put(WelcomeViewModel.class.getSimpleName(), vm);
+                         ViewModel wvm = new WelcomeViewModel(app);
+                        viewModels.put(WelcomeViewModel.class.getSimpleName(), wvm);
+                        break;
+                    case"CardsViewModel":
+                        ViewModel cvm = new CardsViewModel(app);
+                        viewModels.put(CardsViewModel.class.getSimpleName(), cvm);
                         break;
                 }
             }
-            return  (T) viewModels.get(modelClass.getSimpleName());
+            return (T) viewModels.get(modelClass.getSimpleName());
         }
         catch (Exception ex){
             ex.printStackTrace();
