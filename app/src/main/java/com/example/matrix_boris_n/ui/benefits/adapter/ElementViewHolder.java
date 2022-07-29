@@ -1,6 +1,7 @@
 package com.example.matrix_boris_n.ui.benefits.adapter;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ public class ElementViewHolder extends RecyclerView.ViewHolder {
     private final ImageView imageView;
     private final TextView titleView;
     private final TextView smalltitleView;
+    private Bitmap bitmap;
+    private DataListObject element;
 
 
     public ElementViewHolder(@NonNull View itemView) {
@@ -29,6 +32,8 @@ public class ElementViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(DataListObject element, Bitmap result) {
+        this.element = element;
+        this.bitmap = result;
         titleView.setText(element.title);
         smalltitleView.setText(element.sTitle);
         imageView.setImageBitmap(result);

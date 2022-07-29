@@ -17,6 +17,7 @@ import java.util.List;
 public class CategoryViewHolder extends RecyclerView.ViewHolder {
     private final TextView titleView;
     private final RecyclerView recyclerView;
+    private ElementsAdapter.OnElementCLickListener onElementCLickListener;
     private ElementsAdapter adapter = new ElementsAdapter();
 
 
@@ -28,7 +29,8 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
         recyclerView.setAdapter(adapter);
     }
 
-    public void bind(String title, List<DataListObject> elements) {
+    public void bind(String title, List<DataListObject> elements, ElementsAdapter.OnElementCLickListener listener) {
+        adapter.onElementCLickListener = listener;
         titleView.setText(title);
         adapter.setElements(elements);
     }

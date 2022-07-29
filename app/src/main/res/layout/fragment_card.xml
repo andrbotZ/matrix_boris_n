@@ -1,6 +1,43 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.card.CardFragment"/>
+    android:layout_marginLeft="10dp">
+
+    <ImageView
+        android:id="@+id/image"
+        android:background="@color/teal_200"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+    </ImageView>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layoutDirection="rtl"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true">
+        <TextView
+            android:id="@+id/id"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="rtl">
+        </TextView>
+        <TextView
+            android:id="@+id/category"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textDirection="rtl">
+        </TextView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>

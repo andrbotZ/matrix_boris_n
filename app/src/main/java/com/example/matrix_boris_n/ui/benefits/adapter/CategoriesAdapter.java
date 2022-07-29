@@ -18,8 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> {
+
     private List<DataListCat> categories = new ArrayList<>();
     private List<DataListObject> elements = new ArrayList<>();
+    public ElementsAdapter.OnElementCLickListener onElementCLickListener;
 
 
     @NonNull
@@ -41,7 +43,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoryViewHolder> 
                                catList.add(data);
                             }
                         }
-                        holder.bind(cat.cTitle, catList);
+                        holder.bind(cat.cTitle, catList , onElementCLickListener);
                     }
                     break;
                 }

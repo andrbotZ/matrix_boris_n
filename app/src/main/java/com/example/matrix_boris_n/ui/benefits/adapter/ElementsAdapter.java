@@ -21,6 +21,7 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
 
     private List<DataListObject> elements = new ArrayList<>();
     private AppExecutor executor = new AppExecutor();
+    public OnElementCLickListener onElementCLickListener;
 
     @NonNull
     @Override
@@ -38,6 +39,12 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
                 public void onComplete(Bitmap result) {
                     if (result != null)
                         holder.bind(elements.get(position), result);
+                        holder.itemView.setOnClickListener(v -> {
+
+                            if (onElementCLickListener != null){
+                                onElementCLickListener.onClick(v, position);
+                            }
+                        });
                 }
 
                 @Override
@@ -58,4 +65,9 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
         this.elements = elements;
         notifyDataSetChanged();
     }
+    public interface OnElementCLickListener {
+        void onClick(View view, int index);
+    }
 }
+
+
