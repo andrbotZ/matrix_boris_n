@@ -30,10 +30,10 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ElementViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ElementViewHolder holder, int position) {
         if(elements.size() > position){
-
             holder.bind(elements.get(position));
+            holder.bindText(elements.get(position));
             holder.itemView.setOnClickListener(v -> {
 
                 if (onElementCLickListener != null){

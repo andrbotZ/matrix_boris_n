@@ -42,7 +42,7 @@ public class WelcomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().getApplication())).get(WelcomeViewModel.class);
 
-        new CountDownTimer(0, 1000) {
+        new CountDownTimer(1, 1000) {
 
             public void onTick(long millisUntilFinished) {
 

@@ -32,6 +32,7 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder {
     public void bind(String title, List<DataListObject> elements, ElementsAdapter.OnElementCLickListener listener) {
         adapter.onElementCLickListener = listener;
         titleView.setText(title);
+
         adapter.setElements(elements);
     }
 }
