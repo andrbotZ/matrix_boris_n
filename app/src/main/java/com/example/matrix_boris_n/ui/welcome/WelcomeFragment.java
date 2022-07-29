@@ -14,9 +14,7 @@ import android.view.ViewGroup;
 
 import com.example.matrix_boris_n.databinding.FragmentWelcomeBinding;
 import com.example.matrix_boris_n.factory.ViewModelFactory;
-import com.example.matrix_boris_n.models.CatalogItem;
-
-import java.util.List;
+import com.example.matrix_boris_n.ui.welcome.viewmodel.WelcomeViewModel;
 
 public class WelcomeFragment extends Fragment {
 
@@ -37,10 +35,13 @@ public class WelcomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(WelcomeViewModel.class);
-        viewModel.getCatalog().observe(getViewLifecycleOwner(), catalogItems -> {
-            if (catalogItems != null && !catalogItems.isEmpty()){
-                binding.animationView.cancelAnimation();
+        viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance(requireActivity().getApplication())).get(WelcomeViewModel.class);
+        viewModel.isRemoteDataReady.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isReady) {
+               if(isReady){
+                   binding.loading.cancelAnimation();
+               }
             }
         });
         viewModel.fetchRemoteData();
