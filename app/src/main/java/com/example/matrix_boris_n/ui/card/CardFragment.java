@@ -1,6 +1,5 @@
 package com.example.matrix_boris_n.ui.card;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,6 @@ import android.view.ViewGroup;
 
 import com.example.matrix_boris_n.R;
 import com.example.matrix_boris_n.databinding.FragmentCardBinding;
-import com.example.matrix_boris_n.databinding.FragmentCardsBinding;
-import com.example.matrix_boris_n.executor.AppExecutor;
-import com.example.matrix_boris_n.executor.FetchImageCallable;
 import com.example.matrix_boris_n.factory.ViewModelFactory;
 import com.example.matrix_boris_n.models.DataListCat;
 import com.example.matrix_boris_n.models.DataListObject;

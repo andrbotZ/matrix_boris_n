@@ -1,7 +1,5 @@
 package com.example.matrix_boris_n.ui.benefits.adapter;
 
-import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.matrix_boris_n.R;
-import com.example.matrix_boris_n.executor.AppExecutor;
-import com.example.matrix_boris_n.executor.FetchImageCallable;
 import com.example.matrix_boris_n.models.DataListObject;
 
 import java.util.ArrayList;

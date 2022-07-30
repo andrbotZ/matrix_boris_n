@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.example.matrix_boris_n.R;
 import com.example.matrix_boris_n.executor.AppExecutor;
-import com.example.matrix_boris_n.executor.FetchImageCallable;
+import com.example.matrix_boris_n.executor.FetchImagesCallable;
 import com.example.matrix_boris_n.executor.FetchLocalDataCallable;
 import com.example.matrix_boris_n.interfaces.OnDataChangeListener;
 import com.example.matrix_boris_n.interfaces.Repository;
@@ -17,7 +17,6 @@ import com.example.matrix_boris_n.models.DataObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 public class WelcomeRepository implements Repository<DataObject> {
 
@@ -52,7 +51,7 @@ public class WelcomeRepository implements Repository<DataObject> {
                 public void onComplete(DataObject result) {
 
                     downloadImages(result);
-                    broadcastToListeners(result);
+
                 }
 
                 @Override
@@ -70,12 +69,11 @@ public class WelcomeRepository implements Repository<DataObject> {
 
     private void downloadImages(DataObject data) {
         if (!data.elements.isEmpty()) {
-            for (DataListObject element : data.elements) {
-                executor.execute(new FetchImageCallable(element.image), new AppExecutor.Callback<Bitmap>() {
+            executor.execute(new FetchImagesCallable(data), new AppExecutor.Callback<DataObject>() {
                     @Override
-                    public void onComplete(Bitmap result) {
+                    public void onComplete(DataObject result) {
                         if (result != null)
-                            element.bitmap = result;
+                            broadcastToListeners(result);
 
                     }
                     @Override
@@ -83,7 +81,6 @@ public class WelcomeRepository implements Repository<DataObject> {
                         e.printStackTrace();
                     }
                 });
-            }
         }
     }
 
