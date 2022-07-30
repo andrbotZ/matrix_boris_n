@@ -63,7 +63,7 @@ public class CardFragment extends Fragment {
                     if(element.id == element_index){
                         binding.id.setText(String.valueOf(element.id));
                         if(!categories.isEmpty()){
-                            binding.category.setText(categories.get((int) element.catId).cTitle);
+                            binding.category.setText(categories.get((int) element.catId - 1 ).cTitle);
                         }
                         if(element.bitmap != null){
                             binding.image.setImageBitmap(element.bitmap);
