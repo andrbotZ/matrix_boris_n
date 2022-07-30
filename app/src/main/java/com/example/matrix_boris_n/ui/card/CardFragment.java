@@ -59,14 +59,19 @@ public class CardFragment extends Fragment {
         });
         viewModel.elements.observe(getViewLifecycleOwner(), elements -> {
             if(!elements.isEmpty() && element_index > -1){
-                DataListObject item = elements.get(element_index);
-                binding.id.setText(String.valueOf(item.id));
-                if(!categories.isEmpty()){
-                    binding.category.setText(categories.get((int) item.catId).cTitle);
+                for (DataListObject element: elements) {
+                    if(element.id == element_index){
+                        binding.id.setText(String.valueOf(element.id));
+                        if(!categories.isEmpty()){
+                            binding.category.setText(categories.get((int) element.catId).cTitle);
+                        }
+                        if(element.bitmap != null){
+                            binding.image.setImageBitmap(element.bitmap);
+                        }
+                        break;
+                    }
                 }
-                if(item.bitmap != null){
-                    binding.image.setImageBitmap(item.bitmap);
-                }
+
             }
 
         });

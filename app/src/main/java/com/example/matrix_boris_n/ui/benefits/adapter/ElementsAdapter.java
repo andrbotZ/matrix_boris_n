@@ -33,11 +33,10 @@ public class ElementsAdapter extends RecyclerView.Adapter<ElementViewHolder> {
     public void onBindViewHolder(@NonNull ElementViewHolder holder, int position) {
         if(elements.size() > position){
             holder.bind(elements.get(position));
-            holder.bindText(elements.get(position));
             holder.itemView.setOnClickListener(v -> {
 
                 if (onElementCLickListener != null){
-                    onElementCLickListener.onClick(v, position);
+                    onElementCLickListener.onClick(v, (int) elements.get(position).id);
                 }
 
         });

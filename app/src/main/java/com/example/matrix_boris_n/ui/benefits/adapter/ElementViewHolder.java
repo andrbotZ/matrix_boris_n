@@ -39,10 +39,5 @@ public class ElementViewHolder extends RecyclerView.ViewHolder {
             titleView.setTextColor(itemView.getContext().getColor(R.color.black));
             smalltitleView.setTextColor(itemView.getContext().getColor(R.color.black));
         }
-
-
-    }
-
-    public void bindText(DataListObject dataListObject) {
     }
 }
