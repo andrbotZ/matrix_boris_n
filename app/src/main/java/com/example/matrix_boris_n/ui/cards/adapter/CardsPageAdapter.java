@@ -18,11 +18,11 @@ public class CardsPageAdapter extends FragmentStateAdapter {
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        Fragment fragment = TabFragment.newInstance(Constants.tabNames.get(Constants.tabNames.size() - position - 1));
+        Fragment fragment = TabFragment.newInstance(Constants.tabNames.get(position));
         switch (position){
             case 1:
                 return new FavoritesFragment();
-            case 3:
+            case 0:
                 return new BenefitsFragment();
         }
        return fragment;
